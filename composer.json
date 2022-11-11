@@ -1,0 +1,13 @@
+{
+    "name": "cheren/apiato-unit-container",
+    "description": "This is Apiato unit list container",
+    "type": "apiato-container",
+    "license": "Proprietary",
+    "extra": {
+        "apiato": {
+            "container": {
+                "name": "Unit"
+            }
+        }
+    }
+}
