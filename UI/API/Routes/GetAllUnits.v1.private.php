@@ -11,6 +11,66 @@
  * @copyright   Copyright (C) kalistratov.ru, All rights reserved ©.
  * @link        https://kalistratov.ru
  * @author      Sergey Kalistratov <sergey@kalistratov.ru>
+ *
+ * @apiGroup           Units
+ * @apiName            getAllUnits
+ *
+ * @api                {GET} /v1/units Список
+ * @apiDescription     Получить единицу измерения по ID
+ *
+ * @apiVersion         1.0.0
+ * @apiPermission      Аутентифицированный пользовательт
+ *
+ * @apiSuccessExample   {json} Success-Response:
+HTTP/1.1 200 OK
+{
+    "data": [
+        {
+            "object": "Unit",
+            "id": "pJxe0mwAewonZBMP",
+            "name": "Га",
+            "deleted_at": null
+        },
+        {
+            "object": "Unit",
+            "id": "ax5M1y2g9zKPBJNo",
+            "name": "День",
+            "deleted_at": null
+        }
+    ],
+    "meta": {
+        "include": [],
+        "custom": [],
+        "pagination": {
+            "total": 25,
+            "count": 2,
+            "per_page": 2,
+            "current_page": 1,
+            "total_pages": 3,
+            "links": {
+                "next": "http://api.erp.loc/v1/units?page=2"
+            }
+        }
+    }
+}
+ * @apiSuccessExample  {json} Успешный ответ:
+HTTP/1.1 204 No content
+ *
+ * @apiExample {js} NodeJS Axios:
+const axios = require('axios');
+
+let config = {
+    method: 'get',
+    url: 'api.domain.test/v1/units',
+    headers: {
+        'Accept': 'application/json',
+        'Authorization': 'Bearer {access_token}',
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Cookie': 'refreshToken={refresh_token}'
+    }
+};
+
+axios(config);
  */
 
 use App\Containers\Vendor\Unit\UI\API\Controllers\Controller;

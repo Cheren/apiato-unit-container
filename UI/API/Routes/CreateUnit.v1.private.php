@@ -11,6 +11,40 @@
  * @copyright   Copyright (C) kalistratov.ru, All rights reserved ©.
  * @link        https://kalistratov.ru
  * @author      Sergey Kalistratov <sergey@kalistratov.ru>
+ *
+ * @apiGroup           Units
+ * @apiName            createUnit
+ *
+ * @api                {POST} /v1/units Создать
+ * @apiDescription     Создать новую единицу измерения
+ *
+ * @apiVersion         1.0.0
+ * @apiPermission      Аутентифицированный администратор
+ *
+ * @apiParam           {String{1..50}} name Название ед. измерения
+ *
+ * @apiUse             UnitSuccessSingleResponse
+ *
+ * @apiExample {js} NodeJS Axios:
+const axios = require('axios');
+const qs = require('qs');
+let data = qs.stringify({
+    'name': 'unit'
+});
+
+let config = {
+    method: 'post',
+    url: 'api.domain.test/v1/units',
+    headers: {
+        'Accept': 'application/json',
+        'Authorization': 'Bearer {access_token}',
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Cookie': 'refreshToken={refresh_token}'
+    },
+    data: data
+};
+
+axios(config);
  */
 
 use App\Containers\Vendor\Unit\UI\API\Controllers\Controller;
