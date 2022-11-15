@@ -13,7 +13,7 @@
  * @author      Sergey Kalistratov <sergey@kalistratov.ru>
  */
 
-use App\Containers\Vendor\Unit\Model\Unit;
+use App\Containers\Vendor\Unit\Models\Unit;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
@@ -25,8 +25,8 @@ class CreateUnitsTable extends Migration
     {
         Schema::create(Unit::TABLE, function (Blueprint $table) {
             $table->id();
-            $table->string('name', 50);
-            $table->boolean('published')->default(true);
+            $table->string('name', 50)->unique('unit_name_index');
+            $table->softDeletes();
         });
     }
 

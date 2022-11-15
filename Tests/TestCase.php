@@ -13,11 +13,10 @@
  * @author      Sergey Kalistratov <sergey@kalistratov.ru>
  */
 
-namespace App\Containers\Vendor\Unit\Model;
+namespace App\Containers\Vendor\Unit\Tests;
 
-use App\Ship\Parents\Models\Model;
+use App\Ship\Parents\Tests\PhpUnit\TestCase as ShipTestCase;
 
-class Unit extends Model
+class TestCase extends ShipTestCase
 {
-    public const TABLE = 'units';
 }

@@ -13,6 +13,9 @@
  * @author      Sergey Kalistratov <sergey@kalistratov.ru>
  */
 
-return [
+use App\Containers\Vendor\Unit\UI\API\Controllers\Controller;
+use Illuminate\Support\Facades\Route;
 
-];
+Route::post('units', [Controller::class, 'createUnit'])
+    ->name('api_unit_create_unit')
+    ->middleware(['auth:api']);
