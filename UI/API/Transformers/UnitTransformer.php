@@ -23,6 +23,10 @@ class UnitTransformer extends Transformer
 {
     public function transform(Unit $unit): array
     {
+        if ($this->isToList()) {
+            return $this->transformToList($unit);
+        }
+
         $response = [
             'object' => $unit->getResourceKey(),
             'id' => $unit->getHashedKey(),
@@ -33,5 +37,13 @@ class UnitTransformer extends Transformer
         return $this->ifAdmin([
             'real_id' => $unit->id
         ], $response);
+    }
+
+    public function transformToList(Unit $unit): array
+    {
+        return [
+            'value' => $unit->getHashedKey(),
+            'title' => $unit->name
+        ];
     }
 }
