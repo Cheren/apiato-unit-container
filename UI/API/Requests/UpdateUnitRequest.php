@@ -15,11 +15,13 @@
 
 namespace App\Containers\Vendor\Unit\UI\API\Requests;
 
-/**
- * @property mixed $id
- */
+use App\Ship\Collections\ValidationRules;
+use App\Ship\Traits\Request\HasInputId;
+
 class UpdateUnitRequest extends CreateUnitRequest
 {
+    use HasInputId;
+
     protected array $decode = [
         'id'
     ];
@@ -33,5 +35,10 @@ class UpdateUnitRequest extends CreateUnitRequest
         return array_merge(parent::rules(), [
             'id' => $this->getUnitIdRules()->addRequired()
         ]);
+    }
+
+    public function getUnitNameRules(): ValidationRules
+    {
+        return parent::getUnitNameRules()->addIgnoreIdForUnique($this->id);
     }
 }

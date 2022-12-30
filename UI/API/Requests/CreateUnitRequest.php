@@ -17,6 +17,7 @@ namespace App\Containers\Vendor\Unit\UI\API\Requests;
 
 use App\Containers\AppSection\Authorization\Models\Role;
 use App\Containers\Vendor\Unit\Requests\UnitApiRequest;
+use App\Ship\Collections\ValidationRules;
 
 class CreateUnitRequest extends UnitApiRequest
 {
@@ -28,7 +29,12 @@ class CreateUnitRequest extends UnitApiRequest
     public function rules(): array
     {
         return [
-            'name' => $this->getUnitNameRules()->addRequired()
+            'name' => $this->getUnitNameRules()
         ];
+    }
+
+    public function getUnitNameRules(): ValidationRules
+    {
+        return parent::getUnitNameRules()->addRequired();
     }
 }

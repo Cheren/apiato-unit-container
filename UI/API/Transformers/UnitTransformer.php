@@ -16,10 +16,11 @@
 namespace App\Containers\Vendor\Unit\UI\API\Transformers;
 
 use App\Containers\Vendor\Unit\Models\Unit;
+use App\Ship\Contracts\TransformToList;
 use App\Ship\Parents\Transformers\Transformer;
 use Illuminate\Support\Carbon;
 
-class UnitTransformer extends Transformer
+class UnitTransformer extends Transformer implements TransformToList
 {
     public function transform(Unit $unit): array
     {
@@ -39,7 +40,11 @@ class UnitTransformer extends Transformer
         ], $response);
     }
 
-    public function transformToList(Unit $unit): array
+    /**
+     * @param Unit $unit
+     * @return array
+     */
+    public function transformToList($unit): array
     {
         return [
             'value' => $unit->getHashedKey(),
