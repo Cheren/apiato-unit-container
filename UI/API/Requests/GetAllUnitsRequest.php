@@ -16,7 +16,13 @@
 namespace App\Containers\Vendor\Unit\UI\API\Requests;
 
 use App\Containers\Vendor\Unit\Requests\UnitApiRequest;
+use App\Containers\Vendor\Unit\UI\API\Transformers\UnitToListTransformer;
+use App\Ship\Parents\Transformers\Transformer;
 
 class GetAllUnitsRequest extends UnitApiRequest
 {
+    public function getTransformer(): Transformer
+    {
+        return $this->isToList() ? new UnitToListTransformer() : parent::getTransformer();
+    }
 }

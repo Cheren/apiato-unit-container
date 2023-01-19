@@ -17,6 +17,6 @@ namespace App\Containers\Vendor\Unit\Data\Repositories;
 
 use App\Ship\Parents\Repositories\Repository;
 
-class UnitRepository extends Repository
+final class UnitRepository extends Repository
 {
 }

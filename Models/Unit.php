@@ -21,9 +21,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 
 /**
- * @property int $id
- * @property string $name
- * @property null|Carbon $deleted_at
+ * @property-read int $id
+ * @property-read string $name
+ * @property-read null|Carbon $deleted_at
  *
  * @method static UnitFactory factory(...$parameters)
  * @method static int count()

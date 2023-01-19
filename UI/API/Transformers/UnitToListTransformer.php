@@ -13,8 +13,18 @@
  * @author      Sergey Kalistratov <sergey@kalistratov.ru>
  */
 
-namespace App\Containers\Vendor\Unit\Tests;
+namespace App\Containers\Vendor\Unit\UI\API\Transformers;
 
-abstract class ApiTestCase extends TestCase
+use App\Containers\Vendor\Unit\Models\Unit;
+use App\Ship\Parents\Transformers\Transformer;
+
+class UnitToListTransformer extends Transformer
 {
+    public function transform(Unit $unit): array
+    {
+        return [
+            'value' => $unit->getHashedKey(),
+            'title' => $unit->name
+        ];
+    }
 }

@@ -26,15 +26,15 @@ class CreateUnitRequest extends UnitApiRequest
         'roles' => Role::ADMIN
     ];
 
+    public function getUnitNameRules(): ValidationRules
+    {
+        return parent::getUnitNameRules()->addRequired();
+    }
+
     public function rules(): array
     {
         return [
             'name' => $this->getUnitNameRules()
         ];
-    }
-
-    public function getUnitNameRules(): ValidationRules
-    {
-        return parent::getUnitNameRules()->addRequired();
     }
 }

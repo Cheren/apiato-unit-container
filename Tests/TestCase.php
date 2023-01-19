@@ -17,6 +17,6 @@ namespace App\Containers\Vendor\Unit\Tests;
 
 use App\Ship\Parents\Tests\PhpUnit\TestCase as ShipTestCase;
 
-class TestCase extends ShipTestCase
+abstract class TestCase extends ShipTestCase
 {
 }

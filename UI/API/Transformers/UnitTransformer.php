@@ -16,39 +16,21 @@
 namespace App\Containers\Vendor\Unit\UI\API\Transformers;
 
 use App\Containers\Vendor\Unit\Models\Unit;
-use App\Ship\Contracts\TransformToList;
 use App\Ship\Parents\Transformers\Transformer;
-use Illuminate\Support\Carbon;
 
-class UnitTransformer extends Transformer implements TransformToList
+class UnitTransformer extends Transformer
 {
     public function transform(Unit $unit): array
     {
-        if ($this->isToList()) {
-            return $this->transformToList($unit);
-        }
-
         $response = [
             'object' => $unit->getResourceKey(),
             'id' => $unit->getHashedKey(),
             'name' => $unit->name,
-            'deleted_at' => $unit->deleted_at instanceof Carbon ? $unit->deleted_at->getTimestamp() : null
+            'deleted_at' => $this->timestampOrNull($unit->deleted_at)
         ];
 
         return $this->ifAdmin([
             'real_id' => $unit->id
         ], $response);
-    }
-
-    /**
-     * @param Unit $unit
-     * @return array
-     */
-    public function transformToList($unit): array
-    {
-        return [
-            'value' => $unit->getHashedKey(),
-            'title' => $unit->name
-        ];
     }
 }

@@ -39,6 +39,6 @@ class UpdateUnitRequest extends CreateUnitRequest
 
     public function getUnitNameRules(): ValidationRules
     {
-        return parent::getUnitNameRules()->addIgnoreIdForUnique($this->id);
+        return parent::getUnitNameRules()->addIgnoreIdForUnique($this->getId());
     }
 }

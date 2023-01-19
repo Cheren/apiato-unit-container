@@ -20,10 +20,8 @@ use App\Ship\Parents\Tasks\Task;
 
 abstract class UnitTask extends Task
 {
-    protected UnitRepository $repository;
-
-    public function __construct(UnitRepository $repository)
-    {
-        $this->repository = $repository;
+    public function __construct(
+        protected UnitRepository $repository
+    ) {
     }
 }

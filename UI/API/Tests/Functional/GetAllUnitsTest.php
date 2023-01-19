@@ -23,7 +23,7 @@ class GetAllUnitsTest extends ApiTestCase
 {
     protected string $endpoint = 'get@v1/units/';
 
-    public function testWithEmptyId(): void
+    public function test(): void
     {
         $count = 10;
         $defaultCount = Unit::count();
@@ -34,5 +34,21 @@ class GetAllUnitsTest extends ApiTestCase
 
         $responseContent = $this->getResponseContentObject();
         $this->assertSame($count + $defaultCount, $responseContent->meta->pagination->total);
+    }
+
+    public function testWithToList(): void
+    {
+        Unit::factory()->count(12)->create();
+
+        $response = $this->endpoint($this->endpoint . '?to=list')->makeCall();
+        $response->assertStatus(Response::HTTP_OK);
+
+        $responseContent = $this->getResponseContentObject();
+
+        foreach ($responseContent->data as $data) {
+            $data = (array)$data;
+            $this->assertArrayHasKey('value', $data);
+            $this->assertArrayHasKey('title', $data);
+        }
     }
 }

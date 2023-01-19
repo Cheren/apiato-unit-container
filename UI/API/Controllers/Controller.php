@@ -27,7 +27,6 @@ use App\Containers\Vendor\Unit\UI\API\Requests\DeleteUnitRequest;
 use App\Containers\Vendor\Unit\UI\API\Requests\FindUnitByIdRequest;
 use App\Containers\Vendor\Unit\UI\API\Requests\GetAllUnitsRequest;
 use App\Containers\Vendor\Unit\UI\API\Requests\UpdateUnitRequest;
-use App\Containers\Vendor\Unit\UI\API\Transformers\UnitTransformer;
 use App\Ship\Exceptions\CreateResourceFailedException;
 use App\Ship\Exceptions\DeleteResourceFailedException;
 use App\Ship\Exceptions\NotFoundException;
@@ -47,7 +46,7 @@ class Controller extends ApiController
     public function createUnit(CreateUnitRequest $request): JsonResponse
     {
         $unit = app(CreateUnitAction::class)->run($request->get('name'));
-        return $this->created($this->transform($unit, UnitTransformer::class));
+        return $this->created($this->transform($unit, $request->getTransformer()));
     }
 
     /**
@@ -57,7 +56,7 @@ class Controller extends ApiController
      */
     public function deleteUnit(DeleteUnitRequest $request): JsonResponse
     {
-        app(DeleteUnitAction::class)->run((int) $request->id);
+        app(DeleteUnitAction::class)->run($request->getId());
         return $this->noContent();
     }
 
@@ -69,8 +68,8 @@ class Controller extends ApiController
      */
     public function findUnitById(FindUnitByIdRequest $request): JsonResponse
     {
-        $unit = app(FindUnitByIdAction::class)->run((int) $request->id);
-        return $this->json($this->transform($unit, UnitTransformer::class));
+        $unit = app(FindUnitByIdAction::class)->run($request->getId());
+        return $this->json($this->transform($unit, $request->getTransformer()));
     }
 
     /**
@@ -79,12 +78,11 @@ class Controller extends ApiController
      * @throws InvalidTransformerException
      * @throws CoreInternalErrorException
      * @throws RepositoryException
-     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public function getAllUnits(GetAllUnitsRequest $request): JsonResponse
     {
         $unitList = app(GetAllUnitsAction::class)->run();
-        return $this->json($this->transform($unitList, UnitTransformer::class));
+        return $this->json($this->transform($unitList, $request->getTransformer()));
     }
 
     /**
@@ -95,7 +93,7 @@ class Controller extends ApiController
      */
     public function updateUnit(UpdateUnitRequest $request): JsonResponse
     {
-        $unit = app(UpdateUnitAction::class)->run((int) $request->id, $request->get('name'));
-        return $this->json($this->transform($unit, UnitTransformer::class));
+        $unit = app(UpdateUnitAction::class)->run($request->getId(), $request->get('name'));
+        return $this->json($this->transform($unit, $request->getTransformer()));
     }
 }
