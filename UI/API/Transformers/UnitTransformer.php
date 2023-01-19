@@ -26,7 +26,7 @@ class UnitTransformer extends Transformer
             'object' => $unit->getResourceKey(),
             'id' => $unit->getHashedKey(),
             'name' => $unit->name,
-            'deleted_at' => $this->timestampOrNull($unit->deleted_at)
+            'deleted_at' => $this->nullOrTimestamp($unit->deleted_at)
         ];
 
         return $this->ifAdmin([
