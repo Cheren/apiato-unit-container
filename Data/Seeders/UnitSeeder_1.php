@@ -19,7 +19,10 @@ use App\Containers\Vendor\Unit\Tasks\CreateUnitTask;
 use App\Ship\Exceptions\CreateResourceFailedException;
 use App\Ship\Parents\Seeders\Seeder;
 
-class UnitSeeder extends Seeder
+/**
+ * @codingStandardsIgnoreStart
+ */
+class UnitSeeder_1 extends Seeder
 {
     /**
      * @throws CreateResourceFailedException
@@ -41,6 +44,7 @@ class UnitSeeder extends Seeder
             'куб.м',
             'кг',
             'опер.',
+            'м',
             'мм',
             'см',
             'мл',
@@ -51,6 +55,7 @@ class UnitSeeder extends Seeder
             'га',
             'л',
             'упак.',
+            'слой',
             'смена',
             'баллон',
             'компл.'
