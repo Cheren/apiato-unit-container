@@ -38,7 +38,7 @@ class UnitSeeder_1 extends Seeder
     protected function getDefaultUnits(): array
     {
         return [
-            'шт',
+            'шт.',
             'кв.м',
             'пог.м',
             'куб.м',
@@ -58,7 +58,8 @@ class UnitSeeder_1 extends Seeder
             'слой',
             'смена',
             'баллон',
-            'компл.'
+            'компл.',
+            'сотка'
         ];
     }
 }
