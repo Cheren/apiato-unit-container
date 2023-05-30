@@ -82,7 +82,14 @@ class Controller extends ApiController
     public function getAllUnits(GetAllUnitsRequest $request): JsonResponse
     {
         $unitList = app(GetAllUnitsAction::class)->run();
-        return $this->json($this->transform($unitList, $request->getTransformer()));
+        return $this->json(
+            $this->transform(
+                $unitList,
+                $request->getTransformer(),
+                [],
+                $this->getBaseMetaResponseForGetAllAction(__FUNCTION__, $unitList->total())
+            )
+        );
     }
 
     /**
