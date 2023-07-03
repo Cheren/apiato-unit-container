@@ -15,7 +15,7 @@
 
 namespace App\Containers\Vendor\Unit\UI\API\Tests\Functional;
 
-use App\Containers\AppSection\Authorization\Models\Role;
+use App\Containers\Vendor\Unit\Access\UnitPermissions;
 use App\Containers\Vendor\Unit\Models\Unit;
 use App\Containers\Vendor\Unit\Tests\ApiTestCase;
 use Illuminate\Http\Response;
@@ -23,8 +23,8 @@ use Illuminate\Http\Response;
 class UpdateUnitTest extends ApiTestCase
 {
     protected array $access = [
-        'permissions' => '',
-        'roles' => Role::ADMIN
+        'permissions' => UnitPermissions::UPDATE,
+        'roles' => ''
     ];
 
     protected string $endpoint = 'patch@v1/units/{id}';

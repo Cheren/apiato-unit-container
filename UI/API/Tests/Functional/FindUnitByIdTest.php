@@ -15,12 +15,18 @@
 
 namespace App\Containers\Vendor\Unit\UI\API\Tests\Functional;
 
+use App\Containers\Vendor\Unit\Access\UnitPermissions;
 use App\Containers\Vendor\Unit\Models\Unit;
 use App\Containers\Vendor\Unit\Tests\ApiTestCase;
 use Illuminate\Http\Response;
 
 class FindUnitByIdTest extends ApiTestCase
 {
+    protected array $access = [
+        'permissions' => UnitPermissions::READ,
+        'roles' => ''
+    ];
+
     protected string $endpoint = 'get@v1/units/{id}';
 
     public function testWithEmptyId(): void

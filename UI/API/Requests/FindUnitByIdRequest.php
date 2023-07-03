@@ -15,12 +15,18 @@
 
 namespace App\Containers\Vendor\Unit\UI\API\Requests;
 
+use App\Containers\Vendor\Unit\Access\UnitPermissions;
 use App\Containers\Vendor\Unit\Requests\UnitApiRequest;
 use App\Ship\Traits\Request\HasInputId;
 
 class FindUnitByIdRequest extends UnitApiRequest
 {
     use HasInputId;
+
+    protected array $access = [
+        'permissions' => UnitPermissions::READ,
+        'roles' => ''
+    ];
 
     protected array $decode = [
         'id'

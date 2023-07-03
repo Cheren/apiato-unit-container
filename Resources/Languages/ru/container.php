@@ -13,14 +13,6 @@
  * @author      Sergey Kalistratov <sergey@kalistratov.ru>
  */
 
-namespace App\Containers\Vendor\Unit\UI\API\Requests;
-
-use App\Containers\Vendor\Unit\Access\UnitPermissions;
-
-class DeleteUnitRequest extends FindUnitByIdRequest
-{
-    protected array $access = [
-        'permissions' => UnitPermissions::DELETE,
-        'roles' => ''
-    ];
-}
+return [
+    'name' => 'Единицы измерений'
+];

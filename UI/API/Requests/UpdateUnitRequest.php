@@ -15,12 +15,18 @@
 
 namespace App\Containers\Vendor\Unit\UI\API\Requests;
 
+use App\Containers\Vendor\Unit\Access\UnitPermissions;
 use App\Ship\Collections\ValidationRules;
 use App\Ship\Traits\Request\HasInputId;
 
 class UpdateUnitRequest extends CreateUnitRequest
 {
     use HasInputId;
+
+    protected array $access = [
+        'permissions' => UnitPermissions::UPDATE,
+        'roles' => ''
+    ];
 
     protected array $decode = [
         'id'
