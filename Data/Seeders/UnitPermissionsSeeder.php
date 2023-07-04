@@ -15,28 +15,10 @@
 
 namespace App\Containers\Vendor\Unit\Data\Seeders;
 
-use App\Containers\AppSection\Authorization\Dto\CreatePermissionDto;
-use App\Containers\AppSection\Authorization\Tasks\CreatePermissionTask;
 use App\Containers\Vendor\Unit\Access\UnitPermissions;
-use App\Ship\Exceptions\CreateResourceFailedException;
-use App\Ship\Parents\Seeders\Seeder;
-use Spatie\DataTransferObject\Exceptions\UnknownProperties;
+use App\Ship\Seeders\PermissionsSeeder;
 
-class UnitPermissionsSeeder extends Seeder
+final class UnitPermissionsSeeder extends PermissionsSeeder
 {
-    /**
-     * @return void
-     * @throws CreateResourceFailedException
-     * @throws UnknownProperties
-     */
-    public function run(): void
-    {
-        $createPermissionTask = app(CreatePermissionTask::class);
-
-        (new UnitPermissions())
-            ->getList()
-            ->each(function (CreatePermissionDto $permissionDto) use ($createPermissionTask) {
-                $createPermissionTask->run($permissionDto);
-            });
-    }
+    protected ?string $permissionClass = UnitPermissions::class;
 }
