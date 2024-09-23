@@ -23,8 +23,8 @@ class UnitToListTransformer extends Transformer
     public function transform(Unit $unit): array
     {
         return [
-            'value' => $unit->getHashedKey(),
-            'title' => $unit->name
+            VALUE => $unit->getHashedKey(),
+            TITLE => $unit->name
         ];
     }
 }
