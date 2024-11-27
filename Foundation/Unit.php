@@ -13,12 +13,13 @@
  * @author      Sergey Kalistratov <sergey@kalistratov.ru>
  */
 
-namespace App\Containers\Vendor\Unit\Data\Seeders;
+namespace App\Containers\Vendor\Unit\Foundation;
 
-use App\Containers\Vendor\Unit\Permissions\Permissions;
-use App\Ship\Seeders\PermissionsSeeder;
+use App\Ship\Foundation\SectionContainer;
 
-final class UnitPermissionsSeeder extends PermissionsSeeder
+final class Unit extends SectionContainer
 {
-    protected ?string $permissionClass = Permissions::class;
+    public const NAME = 'name';
+
+    protected string $apiBaseUri = 'units';
 }

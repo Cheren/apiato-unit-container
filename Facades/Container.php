@@ -13,12 +13,15 @@
  * @author      Sergey Kalistratov <sergey@kalistratov.ru>
  */
 
-namespace App\Containers\Vendor\Unit\Data\Seeders;
+namespace App\Containers\Vendor\Unit\Facades;
 
-use App\Containers\Vendor\Unit\Permissions\Permissions;
-use App\Ship\Seeders\PermissionsSeeder;
+use App\Containers\Vendor\Unit\Foundation\Unit;
+use App\Ship\Facades\SectionContainerFacade;
 
-final class UnitPermissionsSeeder extends PermissionsSeeder
+final class Container extends SectionContainerFacade
 {
-    protected ?string $permissionClass = Permissions::class;
+    protected static function getFacadeAccessor(): string
+    {
+        return Unit::class;
+    }
 }

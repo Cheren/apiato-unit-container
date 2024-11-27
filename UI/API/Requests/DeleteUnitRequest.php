@@ -15,12 +15,12 @@
 
 namespace App\Containers\Vendor\Unit\UI\API\Requests;
 
-use App\Containers\Vendor\Unit\Access\UnitPermissions;
+use App\Containers\Vendor\Unit\Permissions\Permissions;
 
 class DeleteUnitRequest extends FindUnitByIdRequest
 {
     protected array $access = [
-        'permissions' => UnitPermissions::DELETE,
+        'permissions' => Permissions::DELETE,
         'roles' => ''
     ];
 }

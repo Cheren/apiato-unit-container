@@ -13,13 +13,14 @@
  * @author      Sergey Kalistratov <sergey@kalistratov.ru>
  */
 
-namespace App\Containers\Vendor\Unit\Access;
+namespace App\Containers\Vendor\Unit\Permissions;
 
+use App\Containers\Vendor\Unit\Facades\Container;
 use App\Ship\Access\Permission;
 use Illuminate\Support\Collection;
 use Spatie\DataTransferObject\Exceptions\UnknownProperties;
 
-class UnitPermissions extends Permission
+class Permissions extends Permission
 {
     public const CREATE = 'unit-create';
     public const READ = 'unit-read';
@@ -40,18 +41,18 @@ class UnitPermissions extends Permission
         ]);
     }
 
-    public function getRealSection(): string
-    {
-        return 'vendor';
-    }
-
     public function getSection(): string
     {
-        return 'list';
+        return Container::getSectionName();
     }
 
     public function getContainer(): string
     {
-        return 'unit';
+        return Container::getName();
+    }
+
+    public function getSchemaAccessor(): ?string
+    {
+        return PermissionsSchema::class;
     }
 }

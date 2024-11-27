@@ -15,7 +15,7 @@
 
 namespace App\Containers\Vendor\Unit\UI\API\Requests;
 
-use App\Containers\Vendor\Unit\Access\UnitPermissions;
+use App\Containers\Vendor\Unit\Permissions\Permissions;
 use App\Containers\Vendor\Unit\Requests\UnitApiRequest;
 use App\Containers\Vendor\Unit\UI\API\Transformers\UnitToListTransformer;
 use App\Ship\Contracts\IsListableRequest;
@@ -26,7 +26,7 @@ class GetAllUnitsRequest extends UnitApiRequest implements IsListableRequest
     use ListableTransformerRequest;
 
     protected array $access = [
-        PERMISSIONS => UnitPermissions::READ
+        PERMISSIONS => Permissions::READ
     ];
 
     public function getToListTransformer(): UnitToListTransformer

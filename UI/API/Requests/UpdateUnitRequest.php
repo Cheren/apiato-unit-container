@@ -15,7 +15,7 @@
 
 namespace App\Containers\Vendor\Unit\UI\API\Requests;
 
-use App\Containers\Vendor\Unit\Access\UnitPermissions;
+use App\Containers\Vendor\Unit\Permissions\Permissions;
 use App\Ship\Collections\ValidationRules;
 use App\Ship\Traits\Request\HasInputId;
 
@@ -24,7 +24,7 @@ class UpdateUnitRequest extends CreateUnitRequest
     use HasInputId;
 
     protected array $access = [
-        'permissions' => UnitPermissions::UPDATE,
+        'permissions' => Permissions::UPDATE,
         'roles' => ''
     ];
 

@@ -15,14 +15,14 @@
 
 namespace App\Containers\Vendor\Unit\UI\API\Requests;
 
-use App\Containers\Vendor\Unit\Access\UnitPermissions;
+use App\Containers\Vendor\Unit\Permissions\Permissions;
 use App\Containers\Vendor\Unit\Requests\UnitApiRequest;
 use App\Ship\Collections\ValidationRules;
 
 class CreateUnitRequest extends UnitApiRequest
 {
     protected array $access = [
-        'permissions' => UnitPermissions::CREATE,
+        'permissions' => Permissions::CREATE,
         'roles' => ''
     ];
 
