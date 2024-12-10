@@ -16,21 +16,23 @@
 namespace App\Containers\Vendor\Unit\Permissions;
 
 use App\Containers\AppSection\Authorization\Permission\Schema\PermissionsCollection;
-use App\Ship\Access\PermissionsSchema as ShipPermissionsSchema;
+use App\Containers\Vendor\Unit\Permissions\Schemas\CreateSchema;
+use App\Containers\Vendor\Unit\Permissions\Schemas\DeleteSchema;
+use App\Containers\Vendor\Unit\Permissions\Schemas\ReadSchema;
+use App\Containers\Vendor\Unit\Permissions\Schemas\UpdateSchema;
+use App\Ship\Access\PermissionsSchema;
 
-final class PermissionsSchema extends ShipPermissionsSchema
+final class Schema extends PermissionsSchema
 {
     /**
      * @return PermissionsCollection
      */
     public function schema(): PermissionsCollection
     {
-        $this
-            ->addSimplePermissionSchema(Permissions::CREATE)
-            ->addSimplePermissionSchema(Permissions::READ)
-            ->addSimplePermissionSchema(Permissions::UPDATE)
-            ->addSimplePermissionSchema(Permissions::DELETE);
-
-        return $this->permissionsSchema;
+        return $this->schema
+            ->add((new CreateSchema($this))->getSchema())
+            ->add((new ReadSchema($this))->getSchema())
+            ->add((new UpdateSchema($this))->getSchema())
+            ->add((new DeleteSchema($this))->getSchema());
     }
 }

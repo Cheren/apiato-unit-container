@@ -20,7 +20,7 @@ use App\Ship\Access\Permission;
 use Illuminate\Support\Collection;
 use Spatie\DataTransferObject\Exceptions\UnknownProperties;
 
-class Permissions extends Permission
+final class Permissions extends Permission
 {
     public const CREATE = 'unit-create';
     public const READ = 'unit-read';
@@ -53,6 +53,6 @@ class Permissions extends Permission
 
     public function getSchemaAccessor(): ?string
     {
-        return PermissionsSchema::class;
+        return Schema::class;
     }
 }
