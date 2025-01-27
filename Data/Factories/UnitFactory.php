@@ -16,9 +16,9 @@
 namespace App\Containers\Vendor\Unit\Data\Factories;
 
 use App\Containers\Vendor\Unit\Models\Unit;
+use App\Ship\Database\Eloquent\Collection;
 use App\Ship\Parents\Factories\Factory;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Model;
+use App\Ship\Parents\Models\Model;
 
 /**
  * @method Model|Unit|Collection create($attributes = [], ?Model $parent = null)
