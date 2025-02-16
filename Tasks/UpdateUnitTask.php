@@ -15,7 +15,8 @@
 
 namespace App\Containers\Vendor\Unit\Tasks;
 
-use App\Containers\Vendor\Unit\Models\Unit;
+use App\Containers\Vendor\Unit\Foundation\Unit;
+use App\Containers\Vendor\Unit\Models\Unit as UnitModel;
 use App\Ship\Exceptions\UpdateResourceFailedException;
 use Exception;
 
@@ -24,13 +25,15 @@ class UpdateUnitTask extends UnitTask
     /**
      * @param int $id
      * @param string $name
-     * @return Unit
+     * @return UnitModel
      * @throws UpdateResourceFailedException
      */
-    public function run(int $id, string $name): Unit
+    public function run(int $id, string $name): UnitModel
     {
         try {
-            return $this->repository->update(['name' => $name], $id);
+            return $this->repository->update([
+                Unit::NAME => $name
+            ], $id);
         } catch (Exception $exception) {
             throw new UpdateResourceFailedException();
         }

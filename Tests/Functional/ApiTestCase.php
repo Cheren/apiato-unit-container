@@ -13,10 +13,10 @@
  * @author      Sergey Kalistratov <sergey@kalistratov.ru>
  */
 
-namespace App\Containers\Vendor\Unit\Tests;
+namespace App\Containers\Vendor\Unit\Tests\Functional;
 
-use App\Ship\Parents\Tests\PhpUnit\TestCase as ShipTestCase;
+use App\Containers\Vendor\Unit\Tests\FunctionalTestCase;
 
-abstract class TestCase extends ShipTestCase
+abstract class ApiTestCase extends FunctionalTestCase
 {
 }

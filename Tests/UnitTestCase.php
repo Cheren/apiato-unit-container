@@ -13,21 +13,8 @@
  * @author      Sergey Kalistratov <sergey@kalistratov.ru>
  */
 
-namespace App\Containers\Vendor\Unit\Actions;
+namespace App\Containers\Vendor\Unit\Tests;
 
-use App\Containers\Vendor\Unit\Tasks\DeleteUnitTask;
-use App\Ship\Parents\Actions\Action;
-use App\Ship\Exceptions\DeleteResourceFailedException;
-
-class DeleteUnitAction extends Action
+abstract class UnitTestCase extends ContainerTestCase
 {
-    /**
-     * @param int $id
-     * @return int|null
-     * @throws DeleteResourceFailedException
-     */
-    public function run(int $id): ?int
-    {
-        return app(DeleteUnitTask::class)->run($id);
-    }
 }

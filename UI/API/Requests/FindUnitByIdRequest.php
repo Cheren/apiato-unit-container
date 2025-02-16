@@ -17,6 +17,7 @@ namespace App\Containers\Vendor\Unit\UI\API\Requests;
 
 use App\Containers\Vendor\Unit\Permissions\Permissions;
 use App\Containers\Vendor\Unit\Requests\UnitApiRequest;
+use App\Ship\Collections\ValidationRules;
 use App\Ship\Traits\Request\HasInputId;
 
 class FindUnitByIdRequest extends UnitApiRequest
@@ -24,22 +25,26 @@ class FindUnitByIdRequest extends UnitApiRequest
     use HasInputId;
 
     protected array $access = [
-        'permissions' => Permissions::READ,
-        'roles' => ''
+        PERMISSIONS => Permissions::READ
     ];
 
     protected array $decode = [
-        'id'
+        ID
     ];
 
     protected array $urlParameters = [
-        'id'
+        ID
     ];
 
     public function rules(): array
     {
         return [
-            'id' => $this->getUnitIdRules()->addRequired()
+            ID => $this->getUnitIdValidationRules()
         ];
+    }
+
+    public function getUnitIdValidationRules(): ValidationRules
+    {
+        return parent::getUnitIdValidationRules()->addRequired();
     }
 }

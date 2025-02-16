@@ -17,10 +17,10 @@ namespace App\Containers\Vendor\Unit\Tests\Unit\Actions;
 
 use App\Containers\Vendor\Unit\Actions\FindUnitByIdAction;
 use App\Containers\Vendor\Unit\Models\Unit;
-use App\Containers\Vendor\Unit\Tests\TestCase;
+use App\Containers\Vendor\Unit\Tests\UnitTestCase;
 use App\Ship\Exceptions\NotFoundException;
 
-class FindUnitByIdActionTest extends TestCase
+final class FindUnitByIdActionTest extends UnitTestCase
 {
     public function testFailedWithInvalidId(): void
     {

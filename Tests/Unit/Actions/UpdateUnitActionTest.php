@@ -16,11 +16,12 @@
 namespace App\Containers\Vendor\Unit\Tests\Unit\Actions;
 
 use App\Containers\Vendor\Unit\Actions\UpdateUnitAction;
-use App\Containers\Vendor\Unit\Models\Unit;
-use App\Containers\Vendor\Unit\Tests\TestCase;
+use App\Containers\Vendor\Unit\Foundation\Unit;
+use App\Containers\Vendor\Unit\Models\Unit as UnitModel;
+use App\Containers\Vendor\Unit\Tests\UnitTestCase;
 use App\Ship\Exceptions\UpdateResourceFailedException;
 
-class UpdateUnitActionTest extends TestCase
+final class UpdateUnitActionTest extends UnitTestCase
 {
     public function testFailedWithInvalidId(): void
     {
@@ -32,26 +33,30 @@ class UpdateUnitActionTest extends TestCase
     {
         $this->expectException(UpdateResourceFailedException::class);
 
-        Unit::factory()->create([
-            'name' => 'unit'
-        ]);
+        UnitModel::factory()
+            ->create([
+                Unit::NAME => 'unit'
+            ]);
 
-        $unit = Unit::factory()->create([
-            'name' => 'm/p'
-        ]);
+        $unit = UnitModel::factory()
+            ->create([
+                Unit::NAME => 'm/p'
+            ]);
 
         app(UpdateUnitAction::class)->run($unit->id, 'unit');
     }
 
     public function testSuccess(): void
     {
-        $unit = Unit::factory()->create([
-            'name' => 'unit'
-        ]);
+        $unit = UnitModel::factory()
+            ->create([
+                Unit::NAME => 'unit'
+            ]);
 
         $newName = 'unit/test';
         $unit = app(UpdateUnitAction::class)->run($unit->id, $newName);
-        $this->assertInstanceOf(Unit::class, $unit);
+
+        $this->assertInstanceOf(UnitModel::class, $unit);
         $this->assertSame($newName, $unit->name);
     }
 }

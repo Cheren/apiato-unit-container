@@ -15,6 +15,8 @@
 
 namespace App\Containers\Vendor\Unit\Tests;
 
-abstract class ApiTestCase extends TestCase
+use App\Ship\Parents\Tests\TestCase as ShipTestCase;
+
+abstract class ContainerTestCase extends ShipTestCase
 {
 }

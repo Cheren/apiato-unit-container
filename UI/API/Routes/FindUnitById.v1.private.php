@@ -12,16 +12,18 @@
  * @link        https://kalistratov.ru
  * @author      Sergey Kalistratov <sergey@kalistratov.ru>
  *
- * @apiGroup           Units
- * @apiName            findByUnit
+ * @apiGroup Units
+ * @apiName findByUnit
  *
- * @api                {GET} /v1/units/:id Получить по id
- * @apiDescription     Получить единицу измерения по ID
+ * @api {get} /v1/units/:id Получить по id
+ * @apiDescription Получить единицу измерения по ID
  *
- * @apiVersion         1.0.0
- * @apiPermission      Аутентифицированный пользователь
+ * @apiVersion 1.0.0
+ * @apiPermission Аутентифицированный пользователь
  *
- * @apiUse             UnitSuccessSingleResponse
+ * @apiParam id Уникальный идентификатор еденицы измерения.
+ *
+ * @apiUse UnitSuccessSingleResponse
  *
  * @apiSuccessExample  {json} Успешный ответ:
 HTTP/1.1 204 No content
@@ -43,9 +45,10 @@ let config = {
 axios(config);
  */
 
-use App\Containers\Vendor\Unit\UI\API\Controllers\Controller;
+use App\Containers\Vendor\Unit\Facades\Container;
+use App\Containers\Vendor\Unit\UI\API\Controllers\FindUnitByIdController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('units/{id}', [Controller::class, 'findUnitById'])
+Route::get(Container::getApiUri('{' . ID . '}'), FindUnitByIdController::class)
     ->name('api_unit_find_unit_by_id')
     ->middleware(['auth:api']);

@@ -15,17 +15,58 @@
 
 namespace App\Containers\Vendor\Unit\Traits;
 
+use App\Containers\Vendor\Unit\Foundation\Unit;
+use App\Containers\Vendor\Unit\Models\Unit as UnitModel;
 use App\Ship\Collections\ValidationRules;
+use App\Ship\Parents\Validation\Rule;
+use Illuminate\Validation\Rules\Exists;
+use Illuminate\Validation\Rules\Unique;
 
 trait HasUnitValidationRules
 {
+    /**
+     * @deprecated Please use getUnitIdValidationRules method.
+     */
     public function getUnitIdRules(): ValidationRules
     {
-        return validation_rules(config('vendor-unit.rules.id'));
+        return $this->getUnitIdValidationRules();
     }
 
+    public function getUnitIdValidationRules(): ValidationRules
+    {
+        return validation_rules([
+            $this->getUnitIdExistsValidationRule()
+        ]);
+    }
+
+    /**
+     * @deprecated Please use getUnitNameValidationRules method.
+     */
     public function getUnitNameRules(): ValidationRules
     {
-        return validation_rules(config('vendor-unit.rules.name'));
+        return $this->getUnitNameValidationRules();
+    }
+
+    public function getUnitNameValidationRules(): ValidationRules
+    {
+        return validation_rules([
+            $this->getUnitNameUniqueValidationRule(),
+            $this->getUnitNameMaxValidationRule()
+        ])->addString();
+    }
+
+    public function getUnitIdExistsValidationRule(): Exists
+    {
+        return Rule::exists(UnitModel::TABLE, ID);
+    }
+
+    public function getUnitNameUniqueValidationRule(): Unique
+    {
+        return Rule::unique(UnitModel::TABLE, Unit::NAME);
+    }
+
+    public function getUnitNameMaxValidationRule(): string
+    {
+        return 'max:' . Unit::NAME_MAX_LENGTH;
     }
 }

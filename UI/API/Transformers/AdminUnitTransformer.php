@@ -13,24 +13,17 @@
  * @author      Sergey Kalistratov <sergey@kalistratov.ru>
  */
 
-namespace App\Containers\Vendor\Unit\Tasks;
+namespace App\Containers\Vendor\Unit\UI\API\Transformers;
 
-use App\Ship\Exceptions\DeleteResourceFailedException;
-use Exception;
+use App\Containers\Vendor\Unit\Models\Unit as UnitModel;
 
-class DeleteUnitTask extends UnitTask
+final class AdminUnitTransformer extends UnitTransformer
 {
-    /**
-     * @param int $id
-     * @return int|null
-     * @throws DeleteResourceFailedException
-     */
-    public function run(int $id): ?int
+    public function transform(UnitModel $unit): array
     {
-        try {
-            return $this->repository->delete($id);
-        } catch (Exception $exception) {
-            throw new DeleteResourceFailedException();
-        }
+        return parent::transform($unit) +
+            [
+                $this->realKey(ID) => $unit->id
+            ];
     }
 }

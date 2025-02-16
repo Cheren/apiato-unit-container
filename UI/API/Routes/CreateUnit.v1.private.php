@@ -12,18 +12,18 @@
  * @link        https://kalistratov.ru
  * @author      Sergey Kalistratov <sergey@kalistratov.ru>
  *
- * @apiGroup           Units
- * @apiName            createUnit
+ * @apiGroup Units
+ * @apiName createUnit
  *
- * @api                {POST} /v1/units Создать
- * @apiDescription     Создать новую единицу измерения
+ * @api {post} /v1/units Создать
+ * @apiDescription Создать новую единицу измерения
  *
- * @apiVersion         1.0.0
- * @apiPermission      Аутентифицированный администратор
+ * @apiVersion 1.0.0
+ * @apiPermission Аутентифицированный администратор
  *
- * @apiParam           {String{1..50}} name Название ед. измерения
+ * @apiBody {String{1..50}} name Название ед. измерения
  *
- * @apiUse             UnitSuccessSingleResponse
+ * @apiUse UnitSuccessSingleResponse
  *
  * @apiExample {js} NodeJS Axios:
 const axios = require('axios');
@@ -47,9 +47,10 @@ let config = {
 axios(config);
  */
 
-use App\Containers\Vendor\Unit\UI\API\Controllers\Controller;
+use App\Containers\Vendor\Unit\Facades\Container;
+use App\Containers\Vendor\Unit\UI\API\Controllers\CreateUnitController;
 use Illuminate\Support\Facades\Route;
 
-Route::post('units', [Controller::class, 'createUnit'])
+Route::post(Container::getApiUri(), CreateUnitController::class)
     ->name('api_unit_create_unit')
     ->middleware(['auth:api']);

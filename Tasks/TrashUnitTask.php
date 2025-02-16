@@ -13,15 +13,24 @@
  * @author      Sergey Kalistratov <sergey@kalistratov.ru>
  */
 
-namespace App\Containers\Vendor\Unit\Data\Repositories;
+namespace App\Containers\Vendor\Unit\Tasks;
 
-use App\Containers\Vendor\Unit\Models\Unit as UnitModel;
-use App\Ship\Parents\Repositories\Repository;
+use App\Ship\Exceptions\DeleteResourceFailedException;
+use Exception;
 
-final class UnitRepository extends Repository
+class TrashUnitTask extends UnitTask
 {
-    public function model(): string
+    /**
+     * @param int $id
+     * @return int|null
+     * @throws DeleteResourceFailedException
+     */
+    public function run(int $id): ?int
     {
-        return UnitModel::class;
+        try {
+            return $this->repository->delete($id);
+        } catch (Exception $exception) {
+            throw new DeleteResourceFailedException();
+        }
     }
 }

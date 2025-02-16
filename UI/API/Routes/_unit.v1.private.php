@@ -12,8 +12,8 @@
  * @link        https://kalistratov.ru
  * @author      Sergey Kalistratov <sergey@kalistratov.ru>
  *
- * @apiDefine           UnitSuccessSingleResponse
- * @apiSuccessExample   {json} Success-Response:
+ * @apiDefine UnitSuccessSingleResponse
+ * @apiSuccessExample {json} Успешный ответ:
 HTTP/1.1 200 OK
 {
     "data": {

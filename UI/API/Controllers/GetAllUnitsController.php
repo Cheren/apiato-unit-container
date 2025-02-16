@@ -17,28 +17,32 @@ namespace App\Containers\Vendor\Unit\UI\API\Controllers;
 
 use Apiato\Core\Exceptions\CoreInternalErrorException;
 use Apiato\Core\Exceptions\InvalidTransformerException;
-use App\Containers\Vendor\Unit\Actions\CreateUnitAction;
-use App\Containers\Vendor\Unit\Actions\TrashUnitAction;
-use App\Containers\Vendor\Unit\Actions\FindUnitByIdAction;
 use App\Containers\Vendor\Unit\Actions\GetAllUnitsAction;
-use App\Containers\Vendor\Unit\Actions\UpdateUnitAction;
-use App\Containers\Vendor\Unit\UI\API\Requests\CreateUnitRequest;
-use App\Containers\Vendor\Unit\UI\API\Requests\TrashUnitRequest;
-use App\Containers\Vendor\Unit\UI\API\Requests\FindUnitByIdRequest;
 use App\Containers\Vendor\Unit\UI\API\Requests\GetAllUnitsRequest;
-use App\Containers\Vendor\Unit\UI\API\Requests\UpdateUnitRequest;
-use App\Ship\Exceptions\CreateResourceFailedException;
-use App\Ship\Exceptions\DeleteResourceFailedException;
-use App\Ship\Exceptions\NotFoundException;
-use App\Ship\Exceptions\UpdateResourceFailedException;
 use App\Ship\Parents\Controllers\ApiController;
 use Illuminate\Http\JsonResponse;
 use Prettus\Repository\Exceptions\RepositoryException;
 
-class Controller extends ApiController
+class GetAllUnitsController extends ApiController
 {
-
-
-
-
+    /**
+     * @param GetAllUnitsRequest $request
+     * @param GetAllUnitsAction $action
+     * @return JsonResponse
+     * @throws CoreInternalErrorException
+     * @throws InvalidTransformerException
+     * @throws RepositoryException
+     */
+    public function __invoke(GetAllUnitsRequest $request, GetAllUnitsAction $action): JsonResponse
+    {
+        $unitList = $action->run();
+        return $this->json(
+            $this->transform(
+                $unitList,
+                $request->getTransformer(),
+                [],
+                $this->getBaseMetaResponseForGetAllAction(__CLASS__, $unitList->total())
+            )
+        );
+    }
 }

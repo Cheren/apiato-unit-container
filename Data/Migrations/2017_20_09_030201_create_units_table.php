@@ -13,25 +13,32 @@
  * @author      Sergey Kalistratov <sergey@kalistratov.ru>
  */
 
-use App\Containers\Vendor\Unit\Models\Unit;
-use Illuminate\Database\Migrations\Migration;
+use App\Containers\Vendor\Unit\Foundation\Unit;
+use App\Containers\Vendor\Unit\Models\Unit as UnitModel;
+use App\Ship\Parents\Database\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
 // @codingStandardsIgnoreStart
 
-class CreateUnitsTable extends Migration
+return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create(Unit::TABLE, function (Blueprint $table) {
+        Schema::create($this->getTableName(), function (Blueprint $table) {
             $table->id();
-            $table->string('name', 50)->unique('unit_name_index');
+            $table->string(Unit::NAME, Unit::NAME_MAX_LENGTH)
+                ->unique($this->getFieldIndexName(Unit::NAME));
             $table->softDeletes();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists(Unit::TABLE);
+        Schema::dropIfExists($this->getTableName());
     }
-}
+
+    public function getTableName(): string
+    {
+        return UnitModel::TABLE;
+    }
+};

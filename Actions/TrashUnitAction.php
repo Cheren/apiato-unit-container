@@ -13,19 +13,21 @@
  * @author      Sergey Kalistratov <sergey@kalistratov.ru>
  */
 
-use App\Containers\Vendor\Unit\Models\Unit;
+namespace App\Containers\Vendor\Unit\Actions;
 
-return [
+use App\Containers\Vendor\Unit\Tasks\TrashUnitTask;
+use App\Ship\Exceptions\DeleteResourceFailedException;
+use App\Ship\Parents\Actions\Action;
 
-    'rules' => [
-        'id' => [
-            'exists:' . Unit::TABLE . ',id'
-        ],
-        'name' => [
-            'string',
-            'unique:' . Unit::TABLE . ',name',
-            "max:50"
-        ]
-    ]
-
-];
+class TrashUnitAction extends Action
+{
+    /**
+     * @param int $id
+     * @return int|null
+     * @throws DeleteResourceFailedException
+     */
+    public function run(int $id): ?int
+    {
+        return app(TrashUnitTask::class)->run($id);
+    }
+}

@@ -16,10 +16,10 @@
 namespace App\Containers\Vendor\Unit\Tests\Unit\Actions;
 
 use App\Containers\Vendor\Unit\Actions\GetAllUnitsAction;
-use App\Containers\Vendor\Unit\Tests\TestCase;
+use App\Containers\Vendor\Unit\Tests\UnitTestCase;
 use Illuminate\Pagination\LengthAwarePaginator;
 
-class GetAllUnitsActionTest extends TestCase
+final class GetAllUnitsActionTest extends UnitTestCase
 {
     public function testSuccess(): void
     {

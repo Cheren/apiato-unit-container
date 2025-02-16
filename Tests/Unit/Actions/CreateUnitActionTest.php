@@ -15,17 +15,18 @@
 
 namespace App\Containers\Vendor\Unit\Tests\Unit\Actions;
 
-use App\Containers\Vendor\Unit\Models\Unit;
+use App\Containers\Vendor\Unit\Foundation\Unit;
+use App\Containers\Vendor\Unit\Models\Unit as UnitModel;
 use App\Containers\Vendor\Unit\Tasks\CreateUnitTask;
-use App\Containers\Vendor\Unit\Tests\TestCase;
+use App\Containers\Vendor\Unit\Tests\UnitTestCase;
 use App\Ship\Exceptions\CreateResourceFailedException;
 
-class CreateUnitActionTest extends TestCase
+final class CreateUnitActionTest extends UnitTestCase
 {
     public function testSuccess(): void
     {
         $unit = app(CreateUnitTask::class)->run('p/m');
-        $this->assertInstanceOf(Unit::class, $unit);
+        $this->assertInstanceOf(UnitModel::class, $unit);
         $this->assertSame('p/m', $unit->name);
     }
 
@@ -33,9 +34,10 @@ class CreateUnitActionTest extends TestCase
     {
         $this->expectException(CreateResourceFailedException::class);
 
-        $unit = Unit::factory()->create([
-            'name' => 'mm/p'
-        ]);
+        $unit = UnitModel::factory()
+            ->create([
+                Unit::NAME => 'mm/p'
+            ]);
 
         app(CreateUnitTask::class)->run($unit->name);
     }

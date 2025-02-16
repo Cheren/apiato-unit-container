@@ -15,12 +15,15 @@
 
 namespace App\Containers\Vendor\Unit\Tasks;
 
+use App\Containers\Vendor\Unit\Foundation\Unit;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class GetAllUnitsTask extends UnitTask
 {
     public function run(): LengthAwarePaginator
     {
-        return $this->repository->orderBy('name')->paginate();
+        return $this->repository
+            ->orderBy(Unit::NAME)
+            ->paginate();
     }
 }

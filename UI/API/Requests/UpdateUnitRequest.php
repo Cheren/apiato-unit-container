@@ -18,33 +18,39 @@ namespace App\Containers\Vendor\Unit\UI\API\Requests;
 use App\Containers\Vendor\Unit\Permissions\Permissions;
 use App\Ship\Collections\ValidationRules;
 use App\Ship\Traits\Request\HasInputId;
+use Illuminate\Validation\Rules\Unique;
 
 class UpdateUnitRequest extends CreateUnitRequest
 {
     use HasInputId;
 
     protected array $access = [
-        'permissions' => Permissions::UPDATE,
-        'roles' => ''
+        PERMISSIONS => Permissions::UPDATE
     ];
 
     protected array $decode = [
-        'id'
+        ID
     ];
 
     protected array $urlParameters = [
-        'id'
+        ID
     ];
 
     public function rules(): array
     {
-        return array_merge(parent::rules(), [
-            'id' => $this->getUnitIdRules()->addRequired()
-        ]);
+        return parent::rules() +
+            [
+                ID => $this->getUnitIdValidationRules()
+            ];
     }
 
-    public function getUnitNameRules(): ValidationRules
+    public function getUnitIdValidationRules(): ValidationRules
     {
-        return parent::getUnitNameRules()->addIgnoreIdForUnique($this->getId());
+        return parent::getUnitIdValidationRules()->addRequired();
+    }
+
+    public function getUnitNameUniqueValidationRule(): Unique
+    {
+        return parent::getUnitNameUniqueValidationRule()->ignore($this->getId());
     }
 }

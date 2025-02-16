@@ -15,22 +15,19 @@
 
 namespace App\Containers\Vendor\Unit\UI\API\Transformers;
 
-use App\Containers\Vendor\Unit\Models\Unit;
+use App\Containers\Vendor\Unit\Foundation\Unit;
+use App\Containers\Vendor\Unit\Models\Unit as UnitModel;
 use App\Ship\Parents\Transformers\Transformer;
 
 class UnitTransformer extends Transformer
 {
-    public function transform(Unit $unit): array
+    public function transform(UnitModel $unit): array
     {
-        $response = [
-            'object' => $unit->getResourceKey(),
-            'id' => $unit->getHashedKey(),
-            'name' => $unit->name,
-            'deleted_at' => $this->nullOrTimestamp($unit->deleted_at)
+        return [
+            OBJECT => $unit->getResourceKey(),
+            ID => $unit->getHashedKey(),
+            Unit::NAME => $unit->name,
+            DELETED_AT => $this->nullOrTimestamp($unit->deleted_at)
         ];
-
-        return $this->ifAdmin([
-            'real_id' => $unit->id
-        ], $response);
     }
 }

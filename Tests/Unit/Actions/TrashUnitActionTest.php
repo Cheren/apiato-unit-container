@@ -15,24 +15,28 @@
 
 namespace App\Containers\Vendor\Unit\Tests\Unit\Actions;
 
-use App\Containers\Vendor\Unit\Actions\DeleteUnitAction;
+use App\Containers\Vendor\Unit\Actions\TrashUnitAction;
 use App\Containers\Vendor\Unit\Models\Unit;
-use App\Containers\Vendor\Unit\Tests\TestCase;
+use App\Containers\Vendor\Unit\Tests\UnitTestCase;
 use App\Ship\Exceptions\DeleteResourceFailedException;
 
-class DeleteUnitActionTest extends TestCase
+final class TrashUnitActionTest extends UnitTestCase
 {
     public function testFailedWithInvalidId(): void
     {
         $this->expectException(DeleteResourceFailedException::class);
-        app(DeleteUnitAction::class)->run(123135);
+        app(TrashUnitAction::class)->run(123135);
     }
 
     public function testSuccess(): void
     {
         $unit = Unit::factory()->create();
-        $this->assertSame(1, app(DeleteUnitAction::class)->run($unit->id));
+
+        $this->assertSame(1, app(TrashUnitAction::class)->run($unit->id));
+
         $this->isSoftDeletableModel($unit);
-        $this->assertSoftDeleted(Unit::TABLE, ['id' => $unit->id]);
+        $this->assertSoftDeleted(Unit::TABLE, [
+            ID => $unit->id
+        ]);
     }
 }

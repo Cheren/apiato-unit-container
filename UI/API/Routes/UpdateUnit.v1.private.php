@@ -12,18 +12,20 @@
  * @link        https://kalistratov.ru
  * @author      Sergey Kalistratov <sergey@kalistratov.ru>
  *
- * @apiGroup           Units
- * @apiName            updateUnit
+ * @apiGroup Units
+ * @apiName updateUnit
  *
- * @api                {POST} /v1/units/:id Обновить
- * @apiDescription     Обновить единицу измерения
+ * @api {patch} /v1/units/:id Обновить
+ * @apiDescription Обновить единицу измерения
  *
- * @apiVersion         1.0.0
- * @apiPermission      Аутентифицированный администратор
+ * @apiVersion 1.0.0
+ * @apiPermission Аутентифицированный администратор
  *
- * @apiParam           {String{1..50}} name Название ед. измерения
+ * @apiBody {String{1..50}} name Название ед. измерения
  *
- * @apiUse             UnitSuccessSingleResponse
+ * @apiParam id Уникальный идентификатор еденицы измерения.
+ *
+ * @apiUse UnitSuccessSingleResponse
  *
  * @apiExample {js} NodeJS Axios:
 const axios = require('axios');
@@ -47,9 +49,10 @@ let config = {
 axios(config);
  */
 
-use App\Containers\Vendor\Unit\UI\API\Controllers\Controller;
+use App\Containers\Vendor\Unit\Facades\Container;
+use App\Containers\Vendor\Unit\UI\API\Controllers\UpdateUnitController;
 use Illuminate\Support\Facades\Route;
 
-Route::patch('units/{id}', [Controller::class, 'updateUnit'])
+Route::patch(Container::getApiUri('{' . ID . '}'), UpdateUnitController::class)
     ->name('api_unit_update_unit')
     ->middleware(['auth:api']);

@@ -15,34 +15,26 @@
 
 namespace App\Containers\Vendor\Unit\Data\Factories;
 
-use App\Containers\Vendor\Unit\Models\Unit;
+use App\Containers\Vendor\Unit\Foundation\Unit;
+use App\Containers\Vendor\Unit\Models\Unit as UnitModel;
 use App\Ship\Database\Eloquent\Collection;
 use App\Ship\Parents\Factories\Factory;
 use App\Ship\Parents\Models\Model;
+use App\Ship\Traits\Factory\HasTrashedState;
 
 /**
- * @method Model|Unit|Collection create($attributes = [], ?Model $parent = null)
+ * @method Model|UnitModel|Collection create($attributes = [], ?Model $parent = null)
  */
-class UnitFactory extends Factory
+final class UnitFactory extends Factory
 {
-    protected $model = Unit::class;
+    use HasTrashedState;
 
-    public function definition()
+    protected $model = UnitModel::class;
+
+    public function definition(): array
     {
         return [
-            'name' => $this->faker->name
+            Unit::NAME => $this->faker->name
         ];
-    }
-
-    /**
-     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
-     */
-    public function deleted(): self
-    {
-        return $this->state(function (array $attributes) {
-            return [
-                'deleted_at' => $this->faker->dateTime
-            ];
-        });
     }
 }

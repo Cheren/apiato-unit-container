@@ -12,14 +12,16 @@
  * @link        https://kalistratov.ru
  * @author      Sergey Kalistratov <sergey@kalistratov.ru>
  *
- * @apiGroup           Units
- * @apiName            deleteUnit
+ * @apiGroup Units
+ * @apiName deleteUnit
  *
- * @api                {DELETE} /v1/units/:id Удалить
- * @apiDescription     Удалить еденицу измерения
+ * @api {delete} /v1/units/:id Удалить
+ * @apiDescription Удалить еденицу измерения
  *
- * @apiVersion         1.0.0
- * @apiPermission      Аутентифицированный администратор
+ * @apiVersion 1.0.0
+ * @apiPermission Аутентифицированный администратор
+ *
+ * @apiParam id Уникальный идентификатор еденицы измерения.
  *
  * @apiSuccessExample  {json} Успешный ответ:
 HTTP/1.1 204 No content
@@ -41,9 +43,10 @@ let config = {
 axios(config);
  */
 
-use App\Containers\Vendor\Unit\UI\API\Controllers\Controller;
+use App\Containers\Vendor\Unit\Facades\Container;
+use App\Containers\Vendor\Unit\UI\API\Controllers\TrashUnitController;
 use Illuminate\Support\Facades\Route;
 
-Route::delete('units/{id}', [Controller::class, 'deleteUnit'])
+Route::delete(Container::getApiUri('{' . ID . '}'), TrashUnitController::class)
     ->name('api_unit_delete_unit')
     ->middleware(['auth:api']);

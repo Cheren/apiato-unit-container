@@ -15,10 +15,10 @@
 
 namespace App\Containers\Vendor\Unit\Actions;
 
+use Apiato\Core\Exceptions\CoreInternalErrorException;
 use App\Containers\Vendor\Unit\Tasks\GetAllUnitsTask;
 use App\Ship\Parents\Actions\Action;
 use Illuminate\Pagination\LengthAwarePaginator;
-use Apiato\Core\Exceptions\CoreInternalErrorException;
 use Prettus\Repository\Exceptions\RepositoryException;
 
 class GetAllUnitsAction extends Action
@@ -30,6 +30,8 @@ class GetAllUnitsAction extends Action
      */
     public function run(): LengthAwarePaginator
     {
-        return app(GetAllUnitsTask::class)->addRequestCriteria()->run();
+        return app(GetAllUnitsTask::class)
+            ->addRequestCriteria()
+            ->run();
     }
 }

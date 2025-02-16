@@ -13,15 +13,8 @@
  * @author      Sergey Kalistratov <sergey@kalistratov.ru>
  */
 
-namespace App\Containers\Vendor\Unit\Data\Repositories;
+namespace App\Containers\Vendor\Unit\Tests;
 
-use App\Containers\Vendor\Unit\Models\Unit as UnitModel;
-use App\Ship\Parents\Repositories\Repository;
-
-final class UnitRepository extends Repository
+abstract class FunctionalTestCase extends UnitTestCase
 {
-    public function model(): string
-    {
-        return UnitModel::class;
-    }
 }

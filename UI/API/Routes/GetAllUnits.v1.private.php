@@ -12,16 +12,16 @@
  * @link        https://kalistratov.ru
  * @author      Sergey Kalistratov <sergey@kalistratov.ru>
  *
- * @apiGroup           Units
- * @apiName            getAllUnits
+ * @apiGroup Units
+ * @apiName getAllUnits
  *
- * @api                {GET} /v1/units Список
- * @apiDescription     Получить список сотупных едениц измерения.
+ * @api {get} /v1/units Список
+ * @apiDescription Получить список сотупных едениц измерения.
  *
- * @apiParam           {String="list"} [to] Привести список к формату title, value
+ * @apiBody {String="list"} [to] Привести список к формату title, value
  *
- * @apiVersion         1.0.0
- * @apiPermission      Аутентифицированный пользовательт
+ * @apiVersion 1.0.0
+ * @apiPermission Аутентифицированный пользовательт
  *
  * @apiSuccessExample   {json} Успешный ответ:
 HTTP/1.1 200 OK
@@ -105,9 +105,10 @@ let config = {
 axios(config);
  */
 
-use App\Containers\Vendor\Unit\UI\API\Controllers\Controller;
+use App\Containers\Vendor\Unit\Facades\Container;
+use App\Containers\Vendor\Unit\UI\API\Controllers\GetAllUnitsController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('units', [Controller::class, 'getAllUnits'])
+Route::get(Container::getApiUri(), GetAllUnitsController::class)
     ->name('api_unit_get_all_units')
     ->middleware(['auth:api']);

@@ -16,15 +16,13 @@
 namespace App\Containers\Vendor\Unit\UI\API\Transformers;
 
 use App\Containers\Vendor\Unit\Models\Unit;
-use App\Ship\Parents\Transformers\Transformer;
+use App\Ship\Transformers\ToListTransformer;
+use Illuminate\Database\Eloquent\Model;
 
-class UnitToListTransformer extends Transformer
+class UnitToListTransformer extends ToListTransformer
 {
-    public function transform(Unit $unit): array
+    public function getDefaultTitle(Model|Unit $model): string
     {
-        return [
-            VALUE => $unit->getHashedKey(),
-            TITLE => $unit->name
-        ];
+        return $model->name;
     }
 }

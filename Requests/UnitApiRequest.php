@@ -16,6 +16,7 @@
 namespace App\Containers\Vendor\Unit\Requests;
 
 use App\Containers\Vendor\Unit\Traits\HasUnitValidationRules;
+use App\Containers\Vendor\Unit\UI\API\Transformers\AdminUnitTransformer;
 use App\Containers\Vendor\Unit\UI\API\Transformers\UnitTransformer;
 use App\Ship\Contracts\GettableTransformer;
 use App\Ship\Parents\Transformers\Transformer;
@@ -27,6 +28,6 @@ abstract class UnitApiRequest extends ApiRequest implements GettableTransformer
 
     public function getTransformer(): Transformer
     {
-        return new UnitTransformer();
+        return $this->isAdminUser() ? new AdminUnitTransformer() : new UnitTransformer();
     }
 }

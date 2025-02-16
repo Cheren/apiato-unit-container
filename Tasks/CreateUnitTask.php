@@ -15,7 +15,8 @@
 
 namespace App\Containers\Vendor\Unit\Tasks;
 
-use App\Containers\Vendor\Unit\Models\Unit;
+use App\Containers\Vendor\Unit\Foundation\Unit;
+use App\Containers\Vendor\Unit\Models\Unit as UnitModel;
 use App\Ship\Exceptions\CreateResourceFailedException;
 use Exception;
 
@@ -23,13 +24,15 @@ class CreateUnitTask extends UnitTask
 {
     /**
      * @param string $name
-     * @return Unit
+     * @return UnitModel
      * @throws CreateResourceFailedException
      */
-    public function run(string $name): Unit
+    public function run(string $name): UnitModel
     {
         try {
-            return $this->repository->create(['name' => $name]);
+            return $this->repository->create([
+                Unit::NAME => $name
+            ]);
         } catch (Exception $exception) {
             throw new CreateResourceFailedException();
         }

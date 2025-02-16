@@ -15,6 +15,7 @@
 
 namespace App\Containers\Vendor\Unit\UI\API\Requests;
 
+use App\Containers\Vendor\Unit\Foundation\Unit;
 use App\Containers\Vendor\Unit\Permissions\Permissions;
 use App\Containers\Vendor\Unit\Requests\UnitApiRequest;
 use App\Ship\Collections\ValidationRules;
@@ -22,19 +23,23 @@ use App\Ship\Collections\ValidationRules;
 class CreateUnitRequest extends UnitApiRequest
 {
     protected array $access = [
-        'permissions' => Permissions::CREATE,
-        'roles' => ''
+        PERMISSIONS => Permissions::CREATE
     ];
 
-    public function getUnitNameRules(): ValidationRules
+    public function getUnitNameValidationRules(): ValidationRules
     {
-        return parent::getUnitNameRules()->addRequired();
+        return parent::getUnitNameValidationRules()->addRequired();
     }
 
     public function rules(): array
     {
         return [
-            'name' => $this->getUnitNameRules()
+            Unit::NAME => $this->getUnitNameValidationRules()
         ];
+    }
+
+    public function getName(): mixed
+    {
+        return $this->validated(Unit::NAME);
     }
 }

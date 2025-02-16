@@ -20,6 +20,7 @@ use App\Ship\Foundation\SectionContainer;
 final class Unit extends SectionContainer
 {
     public const NAME = 'name';
+    public const NAME_MAX_LENGTH = 50;
 
     protected string $apiBaseUri = 'units';
 }
