@@ -18,7 +18,7 @@ namespace App\Containers\Vendor\Unit\Traits;
 use App\Containers\Vendor\Unit\Foundation\Unit;
 use App\Containers\Vendor\Unit\Models\Unit as UnitModel;
 use App\Ship\Collections\ValidationRules;
-use App\Ship\Parents\Validation\Rule;
+use App\Ship\Validation\Rule;
 use Illuminate\Validation\Rules\Exists;
 use Illuminate\Validation\Rules\Unique;
 
