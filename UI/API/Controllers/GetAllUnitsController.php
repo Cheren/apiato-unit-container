@@ -36,12 +36,18 @@ class GetAllUnitsController extends ApiController
     public function __invoke(GetAllUnitsRequest $request, GetAllUnitsAction $action): JsonResponse
     {
         $unitList = $action->run();
+
+        $meta = [];
+        if (method_exists($this, 'getBaseMetaResponseForGetAllAction')) {
+            $meta = $this->getBaseMetaResponseForGetAllAction(__CLASS__, $unitList->total());
+        }
+
         return $this->json(
             $this->transform(
                 $unitList,
                 $request->getTransformer(),
                 [],
-                $this->getBaseMetaResponseForGetAllAction(__CLASS__, $unitList->total())
+                $meta
             )
         );
     }
