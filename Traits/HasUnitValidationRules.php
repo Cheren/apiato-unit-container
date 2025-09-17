@@ -55,9 +55,9 @@ trait HasUnitValidationRules
         ])->addString();
     }
 
-    public function getUnitIdExistsValidationRule(): Exists
+    public function getUnitIdExistsValidationRule(string $column = ID): Exists
     {
-        return Rule::exists(UnitModel::TABLE, ID);
+        return Rule::exists(UnitModel::TABLE, $column);
     }
 
     public function getUnitNameUniqueValidationRule(): Unique
